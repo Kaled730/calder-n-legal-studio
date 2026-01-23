@@ -13,41 +13,26 @@ const Footer = () => {
               <Scale size={20} />
             </div>
             <div>
-              <p className="font-display text-lg font-semibold">
-                Abg. Susy Calderón
-              </p>
-              <p className="font-body text-sm text-background/60">
-                Asesoría Legal Profesional
-              </p>
+              <p className="font-display text-lg font-semibold">Abg. Susy Marysol Calderón Marin</p>
+              <p className="font-body text-sm text-background/60">Asesoría Legal Profesional</p>
             </div>
           </div>
 
           {/* Links */}
           <nav className="flex gap-6">
-            <a
-              href="#inicio"
-              className="font-body text-sm text-background/70 hover:text-primary transition-colors"
-            >
+            <a href="#inicio" className="font-body text-sm text-background/70 hover:text-primary transition-colors">
               Inicio
             </a>
-            <a
-              href="#sobre-mi"
-              className="font-body text-sm text-background/70 hover:text-primary transition-colors"
-            >
+            <a href="#sobre-mi" className="font-body text-sm text-background/70 hover:text-primary transition-colors">
               Sobre Mí
             </a>
-            <a
-              href="#contacto"
-              className="font-body text-sm text-background/70 hover:text-primary transition-colors"
-            >
+            <a href="#contacto" className="font-body text-sm text-background/70 hover:text-primary transition-colors">
               Contacto
             </a>
           </nav>
 
           {/* Copyright */}
-          <p className="font-body text-sm text-background/60">
-            © {currentYear} Todos los derechos reservados
-          </p>
+          <p className="font-body text-sm text-background/60">© {currentYear} Todos los derechos reservados</p>
         </div>
       </div>
     </footer>
