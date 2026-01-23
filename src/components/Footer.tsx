@@ -13,7 +13,7 @@ const Footer = () => {
               <Scale size={20} />
             </div>
             <div>
-              <p className="font-display text-lg font-semibold">Abg. Susy Marysol Calderón Marin</p>
+              <p className="font-display text-lg font-semibold">Abg. Susy Ma Calderón Ma</p>
               <p className="font-body text-sm text-background/60">Asesoría Legal Profesional</p>
             </div>
           </div>

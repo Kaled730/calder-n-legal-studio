@@ -4,11 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Calendar as CalendarComponent } from "@/components/ui/calendar";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
 import { cn } from "@/lib/utils";
@@ -25,16 +21,14 @@ const Contact = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!formData.name || !formData.email || !formData.message) {
       toast({
         title: "Campos requeridos",
@@ -60,10 +54,8 @@ const Contact = () => {
   };
 
   const openWhatsApp = () => {
-    const phone = "51999999999"; // Replace with actual phone
-    const message = encodeURIComponent(
-      "Hola, me gustaría agendar una consulta legal con la Abg. Susy Calderón."
-    );
+    const phone = "59170544995"; // Replace with actual phone
+    const message = encodeURIComponent("Hola, me gustaría agendar una consulta legal con la Abg. Susy Calderón.");
     window.open(`https://wa.me/${phone}?text=${message}`, "_blank");
   };
 
@@ -71,19 +63,19 @@ const Contact = () => {
     {
       icon: Phone,
       label: "Teléfono",
-      value: "+51 999 999 999",
-      href: "tel:+51999999999",
+      value: "+591 70544995",
+      href: "tel:+59170544995",
     },
     {
       icon: Mail,
       label: "Correo",
-      value: "contacto@susycalderon.com",
-      href: "mailto:contacto@susycalderon.com",
+      value: "susymar321@gmail.com",
+      href: "mailto:susymar321@gmail.com",
     },
     {
       icon: MapPin,
       label: "Ubicación",
-      value: "Lima, Perú",
+      value: "La Paz, Bolivia",
       href: "#",
     },
   ];
@@ -100,24 +92,18 @@ const Contact = () => {
             Agenda tu <span className="text-gradient">consultoría</span>
           </h2>
           <p className="font-body text-lg text-muted-foreground max-w-2xl mx-auto">
-            Completa el formulario para agendar una consulta o contáctame
-            directamente por WhatsApp para una respuesta inmediata.
+            Completa el formulario para agendar una consulta o contáctame directamente por WhatsApp para una respuesta
+            inmediata.
           </p>
         </div>
 
         <div className="grid lg:grid-cols-5 gap-12 lg:gap-16">
           {/* Contact Form */}
           <div className="lg:col-span-3 animate-fade-up">
-            <form
-              onSubmit={handleSubmit}
-              className="bg-card rounded-2xl p-6 md:p-8 shadow-soft"
-            >
+            <form onSubmit={handleSubmit} className="bg-card rounded-2xl p-6 md:p-8 shadow-soft">
               <div className="grid sm:grid-cols-2 gap-6 mb-6">
                 <div>
-                  <label
-                    htmlFor="name"
-                    className="block font-body text-sm font-medium text-foreground mb-2"
-                  >
+                  <label htmlFor="name" className="block font-body text-sm font-medium text-foreground mb-2">
                     Nombre completo *
                   </label>
                   <Input
@@ -131,10 +117,7 @@ const Contact = () => {
                   />
                 </div>
                 <div>
-                  <label
-                    htmlFor="email"
-                    className="block font-body text-sm font-medium text-foreground mb-2"
-                  >
+                  <label htmlFor="email" className="block font-body text-sm font-medium text-foreground mb-2">
                     Correo electrónico *
                   </label>
                   <Input
@@ -152,10 +135,7 @@ const Contact = () => {
 
               <div className="grid sm:grid-cols-2 gap-6 mb-6">
                 <div>
-                  <label
-                    htmlFor="phone"
-                    className="block font-body text-sm font-medium text-foreground mb-2"
-                  >
+                  <label htmlFor="phone" className="block font-body text-sm font-medium text-foreground mb-2">
                     Teléfono
                   </label>
                   <Input
@@ -169,22 +149,18 @@ const Contact = () => {
                   />
                 </div>
                 <div>
-                  <label className="block font-body text-sm font-medium text-foreground mb-2">
-                    Fecha preferida
-                  </label>
+                  <label className="block font-body text-sm font-medium text-foreground mb-2">Fecha preferida</label>
                   <Popover>
                     <PopoverTrigger asChild>
                       <Button
                         variant="outline"
                         className={cn(
                           "w-full h-12 justify-start text-left font-normal",
-                          !date && "text-muted-foreground"
+                          !date && "text-muted-foreground",
                         )}
                       >
                         <Calendar className="mr-2 h-4 w-4" />
-                        {date
-                          ? format(date, "PPP", { locale: es })
-                          : "Selecciona una fecha"}
+                        {date ? format(date, "PPP", { locale: es }) : "Selecciona una fecha"}
                       </Button>
                     </PopoverTrigger>
                     <PopoverContent className="w-auto p-0" align="start">
@@ -193,11 +169,7 @@ const Contact = () => {
                         selected={date}
                         onSelect={setDate}
                         initialFocus
-                        disabled={(date) =>
-                          date < new Date() ||
-                          date.getDay() === 0 ||
-                          date.getDay() === 6
-                        }
+                        disabled={(date) => date < new Date() || date.getDay() === 0 || date.getDay() === 6}
                         className="pointer-events-auto"
                       />
                     </PopoverContent>
@@ -206,10 +178,7 @@ const Contact = () => {
               </div>
 
               <div className="mb-6">
-                <label
-                  htmlFor="message"
-                  className="block font-body text-sm font-medium text-foreground mb-2"
-                >
+                <label htmlFor="message" className="block font-body text-sm font-medium text-foreground mb-2">
                   Mensaje *
                 </label>
                 <Textarea
@@ -223,13 +192,7 @@ const Contact = () => {
                 />
               </div>
 
-              <Button
-                type="submit"
-                variant="hero"
-                size="lg"
-                className="w-full"
-                disabled={isSubmitting}
-              >
+              <Button type="submit" variant="hero" size="lg" className="w-full" disabled={isSubmitting}>
                 {isSubmitting ? (
                   "Enviando..."
                 ) : (
@@ -245,12 +208,9 @@ const Contact = () => {
           {/* Contact Info */}
           <div className="lg:col-span-2 animate-slide-in-right">
             <div className="bg-gradient-to-br from-primary to-secondary rounded-2xl p-6 md:p-8 text-primary-foreground mb-6">
-              <h3 className="font-display text-2xl font-bold mb-4">
-                Contacto directo
-              </h3>
+              <h3 className="font-display text-2xl font-bold mb-4">Contacto directo</h3>
               <p className="font-body text-primary-foreground/80 mb-6">
-                ¿Prefieres una respuesta inmediata? Contáctame directamente por
-                WhatsApp.
+                ¿Prefieres una respuesta inmediata? Contáctame directamente por WhatsApp.
               </p>
               <Button
                 variant="whatsapp"
@@ -264,23 +224,15 @@ const Contact = () => {
             </div>
 
             <div className="bg-card rounded-2xl p-6 md:p-8 shadow-soft">
-              <h3 className="font-display text-xl font-bold text-foreground mb-6">
-                Información de contacto
-              </h3>
+              <h3 className="font-display text-xl font-bold text-foreground mb-6">Información de contacto</h3>
               <div className="space-y-6">
                 {contactInfo.map((info) => (
-                  <a
-                    key={info.label}
-                    href={info.href}
-                    className="flex items-center gap-4 group"
-                  >
+                  <a key={info.label} href={info.href} className="flex items-center gap-4 group">
                     <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-lg bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors duration-300">
                       <info.icon size={20} />
                     </div>
                     <div>
-                      <p className="font-body text-sm text-muted-foreground">
-                        {info.label}
-                      </p>
+                      <p className="font-body text-sm text-muted-foreground">{info.label}</p>
                       <p className="font-body font-medium text-foreground group-hover:text-primary transition-colors">
                         {info.value}
                       </p>
