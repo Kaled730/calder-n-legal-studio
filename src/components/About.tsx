@@ -50,7 +50,7 @@ const About = () => {
             </span>
 
             <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6">
-              Abg. Susy Marysol Calderon Marin <span className="text-gradient">Calderón Marín</span>
+              Abg. <span className="text-gradient">Calderón Marín</span>
             </h2>
 
             <p className="font-body text-lg text-muted-foreground mb-6 leading-relaxed">
@@ -60,9 +60,8 @@ const About = () => {
             </p>
 
             <p className="font-body text-lg text-muted-foreground mb-8 leading-relaxed">
-              Especializada en diversas áreas del derecho, incluyendo derecho civil, familiar, laboral, administrativo,
-              penal, militar y comercial. Mi compromiso es defender tus derechos con profesionalismo, ética y
-              dedicación.
+              Especializada en diversas áreas del derecho, incluyendo derecho civil, familiar, laboral y comercial. Mi
+              compromiso es defender tus derechos con profesionalismo, ética y dedicación.
             </p>
 
             {/* Features Grid */}
