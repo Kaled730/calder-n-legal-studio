@@ -32,11 +32,7 @@ const About = () => {
           {/* Image */}
           <div className="relative animate-fade-up">
             <div className="relative aspect-[3/4] rounded-2xl overflow-hidden shadow-elevated">
-              <img
-                src={lawyerPortrait}
-                alt="Abg. Susy Marysol Calderón Marín"
-                className="w-full h-full object-cover"
-              />
+              <img src={lawyerPortrait} alt="Abg. Susy Marysol Calderón Marín" className="w-full h-full object-cover" />
               {/* Decorative elements */}
               <div className="absolute inset-0 bg-gradient-to-t from-foreground/30 to-transparent" />
             </div>
@@ -54,22 +50,19 @@ const About = () => {
             </span>
 
             <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6">
-              Abg. Susy Marysol{" "}
-              <span className="text-gradient">Calderón Marín</span>
+              Abg. Susy Marysol Calderon Marin <span className="text-gradient">Calderón Marín</span>
             </h2>
 
             <p className="font-body text-lg text-muted-foreground mb-6 leading-relaxed">
-              Con más de 15 años de experiencia en el ejercicio del derecho, me
-              dedico a brindar asesoría legal integral y personalizada a
-              personas y empresas. Mi enfoque se centra en entender las
-              necesidades únicas de cada cliente para ofrecer soluciones
-              efectivas y estratégicas.
+              Con más de 15 años de experiencia en el ejercicio del derecho, me dedico a brindar asesoría legal integral
+              y personalizada a personas y empresas. Mi enfoque se centra en entender las necesidades únicas de cada
+              cliente para ofrecer soluciones efectivas y estratégicas.
             </p>
 
             <p className="font-body text-lg text-muted-foreground mb-8 leading-relaxed">
-              Especializada en diversas áreas del derecho, incluyendo derecho
-              civil, familiar, laboral y comercial. Mi compromiso es defender
-              tus derechos con profesionalismo, ética y dedicación.
+              Especializada en diversas áreas del derecho, incluyendo derecho civil, familiar, laboral, administrativo,
+              penal, militar y comercial. Mi compromiso es defender tus derechos con profesionalismo, ética y
+              dedicación.
             </p>
 
             {/* Features Grid */}
@@ -83,12 +76,8 @@ const About = () => {
                     <feature.icon size={24} />
                   </div>
                   <div>
-                    <h3 className="font-display text-lg font-semibold text-foreground mb-1">
-                      {feature.title}
-                    </h3>
-                    <p className="font-body text-sm text-muted-foreground">
-                      {feature.description}
-                    </p>
+                    <h3 className="font-display text-lg font-semibold text-foreground mb-1">{feature.title}</h3>
+                    <p className="font-body text-sm text-muted-foreground">{feature.description}</p>
                   </div>
                 </div>
               ))}
