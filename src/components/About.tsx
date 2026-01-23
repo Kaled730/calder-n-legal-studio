@@ -60,8 +60,9 @@ const About = () => {
             </p>
 
             <p className="font-body text-lg text-muted-foreground mb-8 leading-relaxed">
-              Especializada en diversas áreas del derecho, incluyendo derecho civil, familiar, laboral y comercial. Mi
-              compromiso es defender tus derechos con profesionalismo, ética y dedicación.
+              Especializada en diversas áreas del derecho, incluyendo derecho civil, familiar, laboral, penal,
+              administrativo, militar y comercial. Mi compromiso es defender tus derechos con profesionalismo, ética y
+              dedicación.
             </p>
 
             {/* Features Grid */}
