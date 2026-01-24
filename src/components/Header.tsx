@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Menu, X, Phone, Mail } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const Header = () => {
@@ -33,23 +33,6 @@ const Header = () => {
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white shadow-soft`}
     >
       <div className="container mx-auto px-4">
-        {/* Top bar with contact info - Desktop only */}
-        <div className="hidden md:flex items-center justify-end gap-6 py-2 border-b border-border/50 text-sm">
-          <a
-            href="tel:+59170544995"
-            className="flex items-center gap-2 text-[#2E2E2E]/70 hover:text-primary transition-colors"
-          >
-            <Phone size={14} />
-            <span>+591 70544995</span>
-          </a>
-          <a
-            href="mailto:kalcc955@gmail.com"
-            className="flex items-center gap-2 text-[#2E2E2E]/70 hover:text-primary transition-colors"
-          >
-            <Mail size={14} />
-            <span>kalcc955@gmail.com</span>
-          </a>
-        </div>
 
         <div className="flex items-center justify-between h-16 md:h-18">
           {/* Logo */}
@@ -102,23 +85,6 @@ const Header = () => {
         {isMobileMenuOpen && (
           <nav className="md:hidden py-4 border-t border-border animate-fade-in">
             <div className="flex flex-col gap-4">
-              {/* Contact info in mobile menu */}
-              <div className="flex flex-col gap-3 pb-4 border-b border-border/50">
-                <a
-                  href="tel:+59170544995"
-                  className="flex items-center gap-3 text-[#2E2E2E]/70 hover:text-primary transition-colors"
-                >
-                  <Phone size={16} />
-                  <span className="text-sm">+591 70544995</span>
-                </a>
-                <a
-                  href="mailto:kalcc955@gmail.com"
-                  className="flex items-center gap-3 text-[#2E2E2E]/70 hover:text-primary transition-colors"
-                >
-                  <Mail size={16} />
-                  <span className="text-sm">kalcc955@gmail.com</span>
-                </a>
-              </div>
 
               {navLinks.map((link) => (
                 <a
