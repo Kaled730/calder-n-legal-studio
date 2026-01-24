@@ -2,7 +2,7 @@ import { MessageCircle } from "lucide-react";
 
 const WhatsAppFloat = () => {
   const openWhatsApp = () => {
-    const phone = "51999999999"; // Replace with actual phone
+    const phone = "59170544995";
     const message = encodeURIComponent(
       "Hola, me gustaría agendar una consulta legal con la Abg. Susy Calderón."
     );

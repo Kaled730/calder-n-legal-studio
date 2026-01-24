@@ -69,8 +69,8 @@ const Contact = () => {
     {
       icon: Mail,
       label: "Correo",
-      value: "susymar321@gmail.com",
-      href: "mailto:susymar321@gmail.com",
+      value: "kalcc955@gmail.com",
+      href: "mailto:kalcc955@gmail.com",
     },
     {
       icon: MapPin,
