@@ -10,11 +10,6 @@ const Hero = () => {
     }
   };
 
-  const openWhatsApp = () => {
-    const message = encodeURIComponent("Hola, deseo agendar una consultoría legal.");
-    window.open(`https://wa.me/59170544995?text=${message}`, "_blank");
-  };
-
   return (
     <section
       id="inicio"
@@ -62,11 +57,17 @@ const Hero = () => {
             <Button
               variant="whatsapp"
               size="xl"
-              onClick={openWhatsApp}
               className="group"
+              asChild
             >
-              <MessageCircle className="mr-2" />
-              Contactar por WhatsApp
+              <a
+                href="https://wa.me/59170544995?text=Hola%20deseo%20agendar%20una%20consultoría%20legal"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <MessageCircle className="mr-2" />
+                Contactar por WhatsApp
+              </a>
             </Button>
           </div>
 
