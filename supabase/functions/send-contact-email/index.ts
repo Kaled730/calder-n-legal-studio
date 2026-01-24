@@ -28,9 +28,9 @@ const handler = async (req: Request): Promise<Response> => {
 
     // Send email to the lawyer
     const emailResponse = await resend.emails.send({
-      from: "Sitio Web <onboarding@resend.dev>",
+      from: "Consultoría Legal <no-reply@resend.dev>",
       to: ["kalcc955@gmail.com"],
-      subject: `Nueva solicitud de consultoría - ${name}`,
+      subject: "Nueva solicitud de consultoría",
       html: `
         <!DOCTYPE html>
         <html>
