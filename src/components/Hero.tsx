@@ -11,11 +11,8 @@ const Hero = () => {
   };
 
   const openWhatsApp = () => {
-    const phone = "59170544995";
-    const message = encodeURIComponent(
-      "Hola, me gustaría agendar una consulta legal con la Abg. Susy Marysol Calderón Marín."
-    );
-    window.open(`https://wa.me/${phone}?text=${message}`, "_blank");
+    const message = encodeURIComponent("Hola, deseo agendar una consultoría legal.");
+    window.open(`https://wa.me/59170544995?text=${message}`, "_blank");
   };
 
   return (
