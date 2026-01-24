@@ -9,6 +9,7 @@ import { format } from "date-fns";
 import { es } from "date-fns/locale";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 const Contact = () => {
   const { toast } = useToast();
@@ -40,22 +41,41 @@ const Contact = () => {
 
     setIsSubmitting(true);
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    try {
+      const { data, error } = await supabase.functions.invoke('send-contact-email', {
+        body: {
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone || undefined,
+          message: formData.message,
+          date: date ? format(date, "PPP", { locale: es }) : undefined,
+        },
+      });
 
-    toast({
-      title: "¡Solicitud enviada!",
-      description: "Nos pondremos en contacto contigo pronto.",
-    });
+      if (error) throw error;
 
-    setFormData({ name: "", email: "", phone: "", message: "" });
-    setDate(undefined);
-    setIsSubmitting(false);
+      toast({
+        title: "¡Solicitud enviada!",
+        description: "Nos pondremos en contacto contigo pronto.",
+      });
+
+      setFormData({ name: "", email: "", phone: "", message: "" });
+      setDate(undefined);
+    } catch (error: any) {
+      console.error('Error sending email:', error);
+      toast({
+        title: "Error al enviar",
+        description: "Hubo un problema al enviar tu solicitud. Por favor intenta de nuevo.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const openWhatsApp = () => {
-    const phone = "59170544995"; // Replace with actual phone
-    const message = encodeURIComponent("Hola, me gustaría agendar una consulta legal con la Abg. Susy Calderón.");
+    const phone = "59170544995";
+    const message = encodeURIComponent("Hola, me gustaría agendar una consulta legal con la Abg. Susy Marysol Calderón Marín.");
     window.open(`https://wa.me/${phone}?text=${message}`, "_blank");
   };
 

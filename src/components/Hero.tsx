@@ -11,9 +11,9 @@ const Hero = () => {
   };
 
   const openWhatsApp = () => {
-    const phone = "51999999999"; // Replace with actual phone
+    const phone = "59170544995";
     const message = encodeURIComponent(
-      "Hola, me gustaría agendar una consulta legal con la Abg. Susy Calderón."
+      "Hola, me gustaría agendar una consulta legal con la Abg. Susy Marysol Calderón Marín."
     );
     window.open(`https://wa.me/${phone}?text=${message}`, "_blank");
   };
