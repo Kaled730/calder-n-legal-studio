@@ -17,6 +17,31 @@ interface ContactEmailRequest {
   date?: string;
 }
 
+// HTML escape function to prevent XSS/injection attacks
+function escapeHtml(text: string): string {
+  const htmlEntities: Record<string, string> = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;',
+  };
+  return text.replace(/[&<>"']/g, (char) => htmlEntities[char] || char);
+}
+
+// Validate email format
+function isValidEmail(email: string): boolean {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
+
+// Validate phone format (optional, basic validation)
+function isValidPhone(phone: string): boolean {
+  // Allow digits, spaces, hyphens, parentheses, and plus sign
+  const phoneRegex = /^[\d\s\-\(\)\+]+$/;
+  return phone.length <= 20 && phoneRegex.test(phone);
+}
+
 const handler = async (req: Request): Promise<Response> => {
   // Handle CORS preflight requests
   if (req.method === "OPTIONS") {
@@ -25,6 +50,57 @@ const handler = async (req: Request): Promise<Response> => {
 
   try {
     const { name, email, phone, message, date }: ContactEmailRequest = await req.json();
+
+    // Input validation
+    if (!name || typeof name !== 'string' || name.trim().length === 0) {
+      return new Response(
+        JSON.stringify({ error: 'Por favor, ingrese un nombre válido.' }),
+        { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
+
+    if (!email || typeof email !== 'string' || !isValidEmail(email)) {
+      return new Response(
+        JSON.stringify({ error: 'Por favor, ingrese un correo electrónico válido.' }),
+        { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
+
+    if (!message || typeof message !== 'string' || message.trim().length === 0) {
+      return new Response(
+        JSON.stringify({ error: 'Por favor, ingrese un mensaje.' }),
+        { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
+
+    // Length validation to prevent abuse
+    if (name.length > 100) {
+      return new Response(
+        JSON.stringify({ error: 'El nombre es demasiado largo (máximo 100 caracteres).' }),
+        { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
+
+    if (message.length > 2000) {
+      return new Response(
+        JSON.stringify({ error: 'El mensaje es demasiado largo (máximo 2000 caracteres).' }),
+        { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
+
+    if (phone && (typeof phone !== 'string' || !isValidPhone(phone))) {
+      return new Response(
+        JSON.stringify({ error: 'Por favor, ingrese un número de teléfono válido.' }),
+        { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
+
+    // Sanitize all inputs to prevent HTML injection
+    const safeName = escapeHtml(name.trim());
+    const safeEmail = escapeHtml(email.trim());
+    const safePhone = phone ? escapeHtml(phone.trim()) : null;
+    const safeMessage = escapeHtml(message.trim());
+    const safeDate = date ? escapeHtml(date.trim()) : null;
 
     // Send email to the lawyer
     const emailResponse = await resend.emails.send({
@@ -54,27 +130,27 @@ const handler = async (req: Request): Promise<Response> => {
             <div class="content">
               <div class="field">
                 <div class="label">Nombre:</div>
-                <div class="value">${name}</div>
+                <div class="value">${safeName}</div>
               </div>
               <div class="field">
                 <div class="label">Correo electrónico:</div>
-                <div class="value"><a href="mailto:${email}">${email}</a></div>
+                <div class="value"><a href="mailto:${safeEmail}">${safeEmail}</a></div>
               </div>
-              ${phone ? `
+              ${safePhone ? `
               <div class="field">
                 <div class="label">Teléfono:</div>
-                <div class="value"><a href="tel:${phone}">${phone}</a></div>
+                <div class="value"><a href="tel:${safePhone}">${safePhone}</a></div>
               </div>
               ` : ''}
-              ${date ? `
+              ${safeDate ? `
               <div class="field">
                 <div class="label">Fecha preferida para consultoría:</div>
-                <div class="value">${date}</div>
+                <div class="value">${safeDate}</div>
               </div>
               ` : ''}
               <div class="field">
                 <div class="label">Mensaje:</div>
-                <div class="value">${message}</div>
+                <div class="value">${safeMessage}</div>
               </div>
               <div class="footer">
                 <p>Este mensaje fue enviado desde el formulario de contacto de tu sitio web.</p>
@@ -88,7 +164,7 @@ const handler = async (req: Request): Promise<Response> => {
 
     console.log("Email sent successfully:", emailResponse);
 
-    return new Response(JSON.stringify({ success: true, data: emailResponse }), {
+    return new Response(JSON.stringify({ success: true }), {
       status: 200,
       headers: {
         "Content-Type": "application/json",
@@ -96,9 +172,12 @@ const handler = async (req: Request): Promise<Response> => {
       },
     });
   } catch (error: any) {
+    // Log full error details server-side for debugging
     console.error("Error in send-contact-email function:", error);
+    
+    // Return generic error message to client - never expose internal details
     return new Response(
-      JSON.stringify({ error: error.message }),
+      JSON.stringify({ error: 'No se pudo enviar el mensaje. Por favor, inténtelo de nuevo más tarde.' }),
       {
         status: 500,
         headers: { "Content-Type": "application/json", ...corsHeaders },
